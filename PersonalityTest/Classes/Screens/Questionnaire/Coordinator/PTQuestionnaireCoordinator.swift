@@ -10,26 +10,28 @@ import UIKit
 
 
 class PTQuestionnaireCoordinator {
-    
-    // MARK: Vars
-    
-    fileprivate lazy var viewController: PTQuestionnaireViewController = {
-       if let ret = UIStoryboard(name: "Main", bundle: nil)
-        .instantiateViewController(withIdentifier: "Questionnaire") as? PTQuestionnaireViewController {
-        return ret
-        }
-        fatalError("another view controller is expected")
-    }()
-    
-    
+	
     // MARK: Actions
     
     func start(from window: UIWindow) {
-        
+        window.rootViewController = createController()
+		window.makeKeyAndVisible()
     }
     
     func start(from controller: UIViewController) {
-        
+        controller.show(createController(),
+                        sender: self)
     }
+	
+	fileprivate func createController() -> PTQuestionnaireViewController {
+		if let ret = UIStoryboard(name: "Main", bundle: nil)
+			.instantiateViewController(withIdentifier: "Questionnaire") as? PTQuestionnaireViewController {
+			let datasource = PTQuestionnaireDatasource()
+			ret.datasource = datasource
+			ret.eventsHandler = datasource
+			return ret
+		}
+		fatalError("another view controller is expected")
+	}
     
 }

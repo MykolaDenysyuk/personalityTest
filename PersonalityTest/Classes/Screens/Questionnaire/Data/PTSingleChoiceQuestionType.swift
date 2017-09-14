@@ -25,7 +25,7 @@ class PTSingleChoiceQuestionType: PRQuestionTypeInterface {
     // MARK: Vars
     
     var question: PTQuestion
-    var type: PTQuestionTypes = .singleChoice
+    var type: PTQuestionTypes
     var answers: [PTQuestionAnswer]
     var eventsHandler: PRQuestionTypeEvents!
     
@@ -36,6 +36,7 @@ class PTSingleChoiceQuestionType: PRQuestionTypeInterface {
         let questionTypeDict: [String: Any] = json.any("question_type")
         let options: [String] = questionTypeDict.any("options")
         self.answers = options.map{ PTQuestionAnswer(with: $0) }
+		self.type = .singleChoice(self.answers)
     }
     
     

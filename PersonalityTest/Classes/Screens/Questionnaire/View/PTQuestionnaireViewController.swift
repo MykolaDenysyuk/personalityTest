@@ -42,6 +42,12 @@ class PTQuestionnaireViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
+	override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+		coordinator.animate(alongsideTransition: { _ in
+			self.collectionView.collectionViewLayout.invalidateLayout()
+		}, completion: nil)
+	}
+	
 }
 
 extension PTQuestionnaireViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -66,7 +72,7 @@ extension PTQuestionnaireViewController: UICollectionViewDataSource, UICollectio
                                                                    withReuseIdentifier: headerIndentifier,
                                                                    for: indexPath)
         if let header = view as? PTQuestionnaireCategoryHeaderView {
-            header.setup(with: datasource.titleFor(gategory: indexPath.section))
+            header.setup(with: datasource.title(for: indexPath.section))
         }
         return view
     }
@@ -89,11 +95,11 @@ extension PTQuestionnaireViewController: UICollectionViewDataSource, UICollectio
         
         switch viewItem.type {
         case .question(let question):
-            let cell: PTQuestionViewCell = dequeueCell(with: cellIdentifier.answers)
+            let cell: PTQuestionViewCell = dequeueCell(with: cellIdentifier.question)
             cell.setup(with: question)
             return cell
         case .answers(let type):
-            let cell: PTAnswersViewCell = dequeueCell(with: cellIdentifier.question)
+            let cell: PTAnswersViewCell = dequeueCell(with: cellIdentifier.answers)
             cell.setup(with: type)
             return cell
         }
@@ -128,23 +134,34 @@ extension PTQuestionnaireViewController: PTAnswersViewCellDelegate {
 extension PTQuestionnaireViewController: PTQuestionnaireViewIntput {
     
     func reload() {
-        collectionView.reloadData()
+		DispatchQueue.main.async {
+			self.collectionView.reloadData()
+		}
     }
     
     func reloadQuestions(at indexes: [IndexPath]) {
-        collectionView.reloadItems(at: indexes)
+		DispatchQueue.main.async {
+			self.collectionView.reloadItems(at: indexes)
+		}
     }
     
     func reloadCategory(at index: Int) {
+		DispatchQueue.main.async {
+			
+		}
         collectionView.reloadSections([index])
     }
     
     func insertNewQuestions(at indexes: [IndexPath]) {
-        collectionView.insertItems(at: indexes)
+		DispatchQueue.main.async {
+			
+		}
     }
     
     func removeQuestions(at indexes: [IndexPath]) {
-        collectionView.deleteItems(at: indexes)
+		DispatchQueue.main.async {
+			self.collectionView.deleteItems(at: indexes)
+		}
     }
     
 }

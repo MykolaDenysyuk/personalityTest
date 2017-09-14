@@ -17,10 +17,10 @@ enum PTQuestionCategories: String {
     case passion = "passion"
 }
 
-enum PTQuestionTypes: String {
-    case singleChoice = "single_choice"
-    case singleChoiceConditional = "single_choice_conditional"
-    case numberRange = "number_range"
+enum PTQuestionTypes {
+    case singleChoice([PTQuestionAnswer])
+    case singleChoiceConditional([PTQuestionAnswer])
+    case numberRange(Range<Int>)
 }
 
 protocol PRQuestionTypeEvents: class {
@@ -32,7 +32,6 @@ protocol PRQuestionTypeEvents: class {
 protocol PRQuestionTypeInterface {
     var question: PTQuestion {get}
     var type: PTQuestionTypes {get}
-    var answers: [PTQuestionAnswer] {get}
     var eventsHandler: PRQuestionTypeEvents! {get set}
     
     func validate(answer: PTQuestionAnswer)

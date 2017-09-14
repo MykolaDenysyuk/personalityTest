@@ -64,7 +64,7 @@ class PTSingleChoiceConditionalQuestionType: PTSingleChoiceQuestionType {
         }
         
         super.init(with: json)
-        type = .singleChoiceConditional
+        type = .singleChoiceConditional(answers)
     }
     
     

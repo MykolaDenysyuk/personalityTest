@@ -23,11 +23,18 @@ protocol PTNetworkService: PTService {
               onComplete block: @escaping PTNetworkResponseCallback)
 }
 
+let PTNetworkServiceName = "PTNetworkServiceName"
+
+extension PTNetworkService {
+	var serviceName: String {
+		return PTNetworkServiceName
+	}
+}
+
 
 extension PTServices {
     static var network: PTNetworkService {
-        let ret: PTNetworkService = getService()
-        return ret
+        return getService(named: PTNetworkServiceName)
     }
 }
 

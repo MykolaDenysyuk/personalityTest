@@ -15,20 +15,22 @@ class PTQuestionTypeFactory: PTQuestionTypeFactoryInterface {
         
         guard
             let questionType = json["question_type"] as? [String: Any],
-            let typeString = questionType["type"] as? String,
-            let type = PTQuestionTypes(rawValue: typeString)
+            let typeString = questionType["type"] as? String
             else { return nil }
      
-        switch type {
+        switch typeString {
             
-        case .singleChoice:
+        case "single_choice":
             return PTSingleChoiceQuestionType(with: json)
             
-        case .singleChoiceConditional:
+        case "single_choice_conditional":
             return PTSingleChoiceConditionalQuestionType(with: json, and: self)
             
-        case .numberRange:
+        case "number_range":
             return PTNumberRangeQuestionType(with: json)
+			
+		default:
+			return nil
         }
         
     }

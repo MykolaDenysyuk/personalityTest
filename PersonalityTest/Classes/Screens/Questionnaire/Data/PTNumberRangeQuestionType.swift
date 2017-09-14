@@ -35,11 +35,8 @@ class PTNumberRangeQuestionType: PTSingleChoiceQuestionType {
 		let to = range["to"] ?? 1
 		self.range = from..<(to + 1)
         super.init(with: json)
-        self.type = .numberRange
-        self.answers = [
-            PTQuestionAnswer(with: from),
-            PTQuestionAnswer(with: to)
-        ]
+        self.type = .numberRange(self.range)
+		
     }
     
     

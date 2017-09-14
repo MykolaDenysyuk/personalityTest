@@ -17,7 +17,7 @@ struct PTQuestionnaireViewItem {
     
     enum AnswersViewTypes {
         case singleChoice(answers: [Answer])
-        case numberRange(range: Range<Int>, current: Int)
+        case numberRange(range: Range<Int>, current: Int?)
     }
 
     struct Answer {
@@ -46,7 +46,7 @@ protocol PTQuestionnaireViewOutput: class {
 
 protocol PTQuestionnaireViewDatasourceInterface {
     func numberOfCategories() -> Int
-    func titleFor(gategory: Int) -> String
-    func numberOfQuestions(in gategory: Int) -> Int
+    func title(for category: Int) -> String
+    func numberOfQuestions(in category: Int) -> Int
     func question(at index: IndexPath) -> PTQuestionnaireViewItem
 }

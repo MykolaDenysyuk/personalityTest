@@ -9,7 +9,9 @@
 import Foundation
 
 
-protocol PTService {}
+protocol PTService {
+	var serviceName: String {get}
+}
 
 class PTServices {
     
@@ -18,18 +20,14 @@ class PTServices {
     private init() {}
     
     static func setService(_ newService: PTService) {
-        services[serviceName(type: type(of: newService))] = newService
+        services[newService.serviceName] = newService
     }
     
-    static func getService<T>() -> T {
-        if let service = services[serviceName(type: T.self)] as? T {
+	static func getService<T>(named: String) -> T {
+        if let service = services[named] as? T {
             return service
         }
         
         fatalError("service \(T.self) has not been registered yet")
-    }
-    
-    fileprivate static func serviceName(type: Any.Type) -> String {
-        return "\(type)"
     }
 }

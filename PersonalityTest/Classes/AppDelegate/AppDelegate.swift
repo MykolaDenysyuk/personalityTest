@@ -16,11 +16,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
-        if let window = self.window {
-            let coordinator = AppCoordinator(with: window)
-            coordinator.start()
-        }
+		
+		setupDependencies()
+		
+		let window = self.window ?? UIWindow(frame: UIScreen.main.bounds)
+		let coordinator = AppCoordinator(with: window)
+		coordinator.start()
+        self.window = window
         
         return true
     }
@@ -48,5 +50,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 
+}
+
+extension AppDelegate {
+	
+	func setupDependencies() {
+		PTServices.setService(PTNetworkManager())
+	}
+	
 }
 
