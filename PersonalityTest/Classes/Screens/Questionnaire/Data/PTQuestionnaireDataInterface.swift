@@ -24,8 +24,8 @@ enum PTQuestionTypes: String {
 }
 
 protocol PRQuestionTypeEvents: class {
-    func addNew(question: PTQuestion)
-    func remove(question: PTQuestion)
+    func addNew(question: PRQuestionTypeInterface)
+    func remove(question: PRQuestionTypeInterface)
     func reload()
 }
 

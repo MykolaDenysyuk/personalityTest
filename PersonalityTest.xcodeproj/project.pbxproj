@@ -33,6 +33,19 @@
 		6F016A421F6A594C00611BBB /* PTNumberRangeQuestionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F016A411F6A594C00611BBB /* PTNumberRangeQuestionType.swift */; };
 		6F016A441F6A63C300611BBB /* PTQuestionTypeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F016A431F6A63C300611BBB /* PTQuestionTypeFactory.swift */; };
 		6F016A471F6A687500611BBB /* Dictionary+ConvertedValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F016A461F6A687500611BBB /* Dictionary+ConvertedValues.swift */; };
+		A8B7D0F71F6AB299006AEA2B /* PTNumberRangeQuestionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F016A411F6A594C00611BBB /* PTNumberRangeQuestionType.swift */; };
+		A8B7D0F81F6AB2DB006AEA2B /* PTSingleChoiceQuestionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F016A3D1F6A590000611BBB /* PTSingleChoiceQuestionType.swift */; };
+		A8B7D0F91F6AB2E1006AEA2B /* PTQuestionnaireDataInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0169E61F687A5400611BBB /* PTQuestionnaireDataInterface.swift */; };
+		A8B7D0FA1F6AB2E7006AEA2B /* PTGetQuestionsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F016A3B1F6A585700611BBB /* PTGetQuestionsResponse.swift */; };
+		A8B7D0FB1F6AB2EE006AEA2B /* Dictionary+ConvertedValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F016A461F6A687500611BBB /* Dictionary+ConvertedValues.swift */; };
+		A8B7D0FC1F6AB399006AEA2B /* PTQuestionTypeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F016A431F6A63C300611BBB /* PTQuestionTypeFactory.swift */; };
+		A8B7D0FD1F6AB39E006AEA2B /* PTSingleChoiceConditionalQuestionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F016A3F1F6A592700611BBB /* PTSingleChoiceConditionalQuestionType.swift */; };
+		A8B7D0FE1F6AB3A3006AEA2B /* PTQuestionnaireViewInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0169E31F68765A00611BBB /* PTQuestionnaireViewInterface.swift */; };
+		A8B7D1011F6AB75A006AEA2B /* PTNumberRangeQuestionTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B7D1001F6AB75A006AEA2B /* PTNumberRangeQuestionTypeTests.swift */; };
+		A8B7D1031F6AB86C006AEA2B /* TestQuestionTypeEventsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B7D1021F6AB86B006AEA2B /* TestQuestionTypeEventsHandler.swift */; };
+		A8B7D1051F6ABA8D006AEA2B /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B7D1041F6ABA8D006AEA2B /* Helpers.swift */; };
+		A8B7D1071F6ABAD1006AEA2B /* PTSingleChoiceConditionalQuestionTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B7D1061F6ABAD1006AEA2B /* PTSingleChoiceConditionalQuestionTypeTests.swift */; };
+		A8B7D1091F6ABC5F006AEA2B /* TestQuestionTypeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B7D1081F6ABC5F006AEA2B /* TestQuestionTypeFactory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +98,11 @@
 		6F016A411F6A594C00611BBB /* PTNumberRangeQuestionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTNumberRangeQuestionType.swift; sourceTree = "<group>"; };
 		6F016A431F6A63C300611BBB /* PTQuestionTypeFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTQuestionTypeFactory.swift; sourceTree = "<group>"; };
 		6F016A461F6A687500611BBB /* Dictionary+ConvertedValues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+ConvertedValues.swift"; sourceTree = "<group>"; };
+		A8B7D1001F6AB75A006AEA2B /* PTNumberRangeQuestionTypeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTNumberRangeQuestionTypeTests.swift; sourceTree = "<group>"; };
+		A8B7D1021F6AB86B006AEA2B /* TestQuestionTypeEventsHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestQuestionTypeEventsHandler.swift; sourceTree = "<group>"; };
+		A8B7D1041F6ABA8D006AEA2B /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		A8B7D1061F6ABAD1006AEA2B /* PTSingleChoiceConditionalQuestionTypeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTSingleChoiceConditionalQuestionTypeTests.swift; sourceTree = "<group>"; };
+		A8B7D1081F6ABC5F006AEA2B /* TestQuestionTypeFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestQuestionTypeFactory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +162,7 @@
 		6F0169BC1F686DFF00611BBB /* PersonalityTestTests */ = {
 			isa = PBXGroup;
 			children = (
+				A8B7D0FF1F6AB74A006AEA2B /* Qustionnaire */,
 				6F0169BD1F686DFF00611BBB /* PersonalityTestTests.swift */,
 				6F0169BF1F686DFF00611BBB /* Info.plist */,
 			);
@@ -284,6 +303,18 @@
 				6F016A461F6A687500611BBB /* Dictionary+ConvertedValues.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		A8B7D0FF1F6AB74A006AEA2B /* Qustionnaire */ = {
+			isa = PBXGroup;
+			children = (
+				A8B7D1041F6ABA8D006AEA2B /* Helpers.swift */,
+				A8B7D1001F6AB75A006AEA2B /* PTNumberRangeQuestionTypeTests.swift */,
+				A8B7D1061F6ABAD1006AEA2B /* PTSingleChoiceConditionalQuestionTypeTests.swift */,
+				A8B7D1021F6AB86B006AEA2B /* TestQuestionTypeEventsHandler.swift */,
+				A8B7D1081F6ABC5F006AEA2B /* TestQuestionTypeFactory.swift */,
+			);
+			path = Qustionnaire;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -452,7 +483,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A8B7D1011F6AB75A006AEA2B /* PTNumberRangeQuestionTypeTests.swift in Sources */,
+				A8B7D0FB1F6AB2EE006AEA2B /* Dictionary+ConvertedValues.swift in Sources */,
+				A8B7D0FC1F6AB399006AEA2B /* PTQuestionTypeFactory.swift in Sources */,
+				A8B7D0F81F6AB2DB006AEA2B /* PTSingleChoiceQuestionType.swift in Sources */,
+				A8B7D1091F6ABC5F006AEA2B /* TestQuestionTypeFactory.swift in Sources */,
+				A8B7D0F71F6AB299006AEA2B /* PTNumberRangeQuestionType.swift in Sources */,
+				A8B7D0FA1F6AB2E7006AEA2B /* PTGetQuestionsResponse.swift in Sources */,
+				A8B7D0FD1F6AB39E006AEA2B /* PTSingleChoiceConditionalQuestionType.swift in Sources */,
+				A8B7D1051F6ABA8D006AEA2B /* Helpers.swift in Sources */,
 				6F0169BE1F686DFF00611BBB /* PersonalityTestTests.swift in Sources */,
+				A8B7D1071F6ABAD1006AEA2B /* PTSingleChoiceConditionalQuestionTypeTests.swift in Sources */,
+				A8B7D0FE1F6AB3A3006AEA2B /* PTQuestionnaireViewInterface.swift in Sources */,
+				A8B7D1031F6AB86C006AEA2B /* TestQuestionTypeEventsHandler.swift in Sources */,
+				A8B7D0F91F6AB2E1006AEA2B /* PTQuestionnaireDataInterface.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

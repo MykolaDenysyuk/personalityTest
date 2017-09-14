@@ -45,13 +45,16 @@ class PTSingleChoiceConditionalQuestionType: PTSingleChoiceQuestionType {
     // MARK: Vars
     
     let relatedQuestion: PRQuestionTypeInterface
-    
+	let predicate: Predicate
+	fileprivate var isRelatedQuestionShown = false
+	
     // MARK: Initializer
     
     init?(with json: [String: Any], and factory: PTQuestionTypeFactoryInterface) {
         let questionTypeDict: [String: Any] = json.any("question_type")
-        let condition: [String: Any] = questionTypeDict.any("condition") // todo
-        if let ifPositive = questionTypeDict["if_positive"],
+        let condition: [String: Any] = questionTypeDict.any("condition")
+		predicate = Predicate(with: condition.any("predicate"))
+        if let ifPositive = condition["if_positive"],
             let relatedQuestion = factory.questionType(for: ifPositive) {
             self.relatedQuestion = relatedQuestion
         }
@@ -68,7 +71,31 @@ class PTSingleChoiceConditionalQuestionType: PTSingleChoiceQuestionType {
     // MARK: Actions
     
     override func validate(answer: PTQuestionAnswer) {
-        
+		if let lastAnswer = question.answered?.title, lastAnswer == answer.title {
+			return
+		}
+		if predicate.validate(with: answer.title) {
+			eventsHandler.addNew(question: relatedQuestion)
+			isRelatedQuestionShown = true
+		} else {
+			if isRelatedQuestionShown {
+				isRelatedQuestionShown = false
+				eventsHandler.remove(question: relatedQuestion)
+			}
+		}
+		question.answered = answer
     }
     
+}
+
+extension PTSingleChoiceConditionalQuestionType {
+	class Predicate {
+		private let values: [String]
+		init(with json: [String: Any]) {
+			values = json.any("exactEquals")
+		}
+		func validate(with string: String) -> Bool {
+			return values.contains(string)
+		}
+	}
 }
