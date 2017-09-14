@@ -18,6 +18,7 @@ class PTQuestionnaireViewController: UIViewController {
         didSet {
             let nib = UINib(nibName: "PTQuestionnaireCategoryHeaderView",
                             bundle: nil)
+			collectionView.layoutMargins = .zero
             collectionView.register(nib,
                                     forSupplementaryViewOfKind: UICollectionElementKindSectionHeader,
                                     withReuseIdentifier: headerIndentifier)
@@ -43,8 +44,9 @@ class PTQuestionnaireViewController: UIViewController {
     }
 
 	override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+		collectionView.collectionViewLayout.invalidateLayout()
 		coordinator.animate(alongsideTransition: { _ in
-			self.collectionView.collectionViewLayout.invalidateLayout()
+			self.collectionView.layoutIfNeeded()
 		}, completion: nil)
 	}
 	
@@ -53,16 +55,17 @@ class PTQuestionnaireViewController: UIViewController {
 extension PTQuestionnaireViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+		let contentWidth = collectionView.frame.width
         if traitCollection.horizontalSizeClass == .compact {
-            return CGSize(width: collectionView.frame.width,
+            return CGSize(width: contentWidth,
                           height: 60)
         }
         else {
-            return CGSize(width: collectionView.frame.width/2,
+            return CGSize(width: contentWidth/2,
                           height: 60)
         }
     }
-    
+	
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return datasource.numberOfCategories()
     }

@@ -47,6 +47,9 @@
 		A8B7D1071F6ABAD1006AEA2B /* PTSingleChoiceConditionalQuestionTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B7D1061F6ABAD1006AEA2B /* PTSingleChoiceConditionalQuestionTypeTests.swift */; };
 		A8B7D1091F6ABC5F006AEA2B /* TestQuestionTypeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B7D1081F6ABC5F006AEA2B /* TestQuestionTypeFactory.swift */; };
 		A8B7D10C1F6AC15B006AEA2B /* PTQuestionnaireDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B7D10B1F6AC15B006AEA2B /* PTQuestionnaireDatasource.swift */; };
+		A8B7D10E1F6AE627006AEA2B /* PTAnswerOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B7D10D1F6AE627006AEA2B /* PTAnswerOptionsView.swift */; };
+		A8B7D1101F6AE64B006AEA2B /* PTAnswerNumberRangeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B7D10F1F6AE64B006AEA2B /* PTAnswerNumberRangeView.swift */; };
+		A8B7D1121F6AE8D8006AEA2B /* PTAnswerNumberRangeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8B7D1111F6AE8D8006AEA2B /* PTAnswerNumberRangeView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,6 +108,9 @@
 		A8B7D1061F6ABAD1006AEA2B /* PTSingleChoiceConditionalQuestionTypeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTSingleChoiceConditionalQuestionTypeTests.swift; sourceTree = "<group>"; };
 		A8B7D1081F6ABC5F006AEA2B /* TestQuestionTypeFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestQuestionTypeFactory.swift; sourceTree = "<group>"; };
 		A8B7D10B1F6AC15B006AEA2B /* PTQuestionnaireDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTQuestionnaireDatasource.swift; sourceTree = "<group>"; };
+		A8B7D10D1F6AE627006AEA2B /* PTAnswerOptionsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTAnswerOptionsView.swift; sourceTree = "<group>"; };
+		A8B7D10F1F6AE64B006AEA2B /* PTAnswerNumberRangeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTAnswerNumberRangeView.swift; sourceTree = "<group>"; };
+		A8B7D1111F6AE8D8006AEA2B /* PTAnswerNumberRangeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PTAnswerNumberRangeView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -249,6 +255,9 @@
 				6F016A2C1F69B37C00611BBB /* PTQuestionnaireCategoryHeaderView.xib */,
 				6F016A2F1F69B4A400611BBB /* PTQuestionViewCell.swift */,
 				6F016A311F69B64E00611BBB /* PTAnswersViewCell.swift */,
+				A8B7D10D1F6AE627006AEA2B /* PTAnswerOptionsView.swift */,
+				A8B7D10F1F6AE64B006AEA2B /* PTAnswerNumberRangeView.swift */,
+				A8B7D1111F6AE8D8006AEA2B /* PTAnswerNumberRangeView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -442,6 +451,7 @@
 				6F0169B31F686DFF00611BBB /* LaunchScreen.storyboard in Resources */,
 				6F0169B01F686DFF00611BBB /* Assets.xcassets in Resources */,
 				6F016A2E1F69B37C00611BBB /* PTQuestionnaireCategoryHeaderView.xib in Resources */,
+				A8B7D1121F6AE8D8006AEA2B /* PTAnswerNumberRangeView.xib in Resources */,
 				6F0169DD1F6870DA00611BBB /* personality_test.json in Resources */,
 				6F0169AE1F686DFF00611BBB /* Main.storyboard in Resources */,
 			);
@@ -481,8 +491,10 @@
 				6F0169DF1F68716F00611BBB /* AppCoordinator.swift in Sources */,
 				6F016A321F69B64E00611BBB /* PTAnswersViewCell.swift in Sources */,
 				6F016A241F69AF9700611BBB /* PTServices.swift in Sources */,
+				A8B7D1101F6AE64B006AEA2B /* PTAnswerNumberRangeView.swift in Sources */,
 				6F016A351F69BB6200611BBB /* PTCollectionViewCell.swift in Sources */,
 				6F0169E41F68765A00611BBB /* PTQuestionnaireViewInterface.swift in Sources */,
+				A8B7D10E1F6AE627006AEA2B /* PTAnswerOptionsView.swift in Sources */,
 				6F0169DA1F686EAE00611BBB /* AppDelegate.swift in Sources */,
 				6F016A3C1F6A585700611BBB /* PTGetQuestionsResponse.swift in Sources */,
 				6F016A3A1F6A503B00611BBB /* PTNetworkManager.swift in Sources */,
