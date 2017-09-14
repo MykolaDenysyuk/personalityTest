@@ -89,6 +89,7 @@ class PTAnswerOptionsView: PTAnswersView {
 		for v in answerViews {
 			setAnswer(view: v, selected: label.tag == v.tag)
 		}
+        delegate?.didSelectAnswer(index: label.tag)
 	}
 	
 	fileprivate func setAnswer(view: UILabel, selected: Bool) {

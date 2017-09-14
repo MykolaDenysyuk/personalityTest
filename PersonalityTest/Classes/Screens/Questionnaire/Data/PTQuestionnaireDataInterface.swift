@@ -23,18 +23,18 @@ enum PTQuestionTypes {
     case numberRange(Range<Int>)
 }
 
-protocol PRQuestionTypeEvents: class {
-    func addNew(question: PRQuestionTypeInterface)
-    func remove(question: PRQuestionTypeInterface)
-    func reload()
+enum PRQuestionTypeEvents {
+    case none
+    case addNew(PRQuestionTypeInterface)
+    case remove(PRQuestionTypeInterface)
+    case reload
 }
 
 protocol PRQuestionTypeInterface {
     var question: PTQuestion {get}
     var type: PTQuestionTypes {get}
-    var eventsHandler: PRQuestionTypeEvents! {get set}
     
-    func validate(answer: PTQuestionAnswer)
+    func validate(value: Int) -> PRQuestionTypeEvents
 }
 
 struct PTQuestionAnswer {

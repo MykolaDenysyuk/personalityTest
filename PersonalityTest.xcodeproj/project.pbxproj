@@ -43,7 +43,6 @@
 		A8B7D0FD1F6AB39E006AEA2B /* PTSingleChoiceConditionalQuestionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F016A3F1F6A592700611BBB /* PTSingleChoiceConditionalQuestionType.swift */; };
 		A8B7D0FE1F6AB3A3006AEA2B /* PTQuestionnaireViewInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0169E31F68765A00611BBB /* PTQuestionnaireViewInterface.swift */; };
 		A8B7D1011F6AB75A006AEA2B /* PTNumberRangeQuestionTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B7D1001F6AB75A006AEA2B /* PTNumberRangeQuestionTypeTests.swift */; };
-		A8B7D1031F6AB86C006AEA2B /* TestQuestionTypeEventsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B7D1021F6AB86B006AEA2B /* TestQuestionTypeEventsHandler.swift */; };
 		A8B7D1051F6ABA8D006AEA2B /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B7D1041F6ABA8D006AEA2B /* Helpers.swift */; };
 		A8B7D1071F6ABAD1006AEA2B /* PTSingleChoiceConditionalQuestionTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B7D1061F6ABAD1006AEA2B /* PTSingleChoiceConditionalQuestionTypeTests.swift */; };
 		A8B7D1091F6ABC5F006AEA2B /* TestQuestionTypeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B7D1081F6ABC5F006AEA2B /* TestQuestionTypeFactory.swift */; };
@@ -105,7 +104,6 @@
 		6F016A461F6A687500611BBB /* Dictionary+ConvertedValues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+ConvertedValues.swift"; sourceTree = "<group>"; };
 		A861CF021F6B015D0021E29A /* PTQuestionnaireViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTQuestionnaireViewLayout.swift; sourceTree = "<group>"; };
 		A8B7D1001F6AB75A006AEA2B /* PTNumberRangeQuestionTypeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTNumberRangeQuestionTypeTests.swift; sourceTree = "<group>"; };
-		A8B7D1021F6AB86B006AEA2B /* TestQuestionTypeEventsHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestQuestionTypeEventsHandler.swift; sourceTree = "<group>"; };
 		A8B7D1041F6ABA8D006AEA2B /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		A8B7D1061F6ABAD1006AEA2B /* PTSingleChoiceConditionalQuestionTypeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTSingleChoiceConditionalQuestionTypeTests.swift; sourceTree = "<group>"; };
 		A8B7D1081F6ABC5F006AEA2B /* TestQuestionTypeFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestQuestionTypeFactory.swift; sourceTree = "<group>"; };
@@ -339,7 +337,6 @@
 				A8B7D1041F6ABA8D006AEA2B /* Helpers.swift */,
 				A8B7D1001F6AB75A006AEA2B /* PTNumberRangeQuestionTypeTests.swift */,
 				A8B7D1061F6ABAD1006AEA2B /* PTSingleChoiceConditionalQuestionTypeTests.swift */,
-				A8B7D1021F6AB86B006AEA2B /* TestQuestionTypeEventsHandler.swift */,
 				A8B7D1081F6ABC5F006AEA2B /* TestQuestionTypeFactory.swift */,
 			);
 			path = Qustionnaire;
@@ -539,7 +536,6 @@
 				6F0169BE1F686DFF00611BBB /* PersonalityTestTests.swift in Sources */,
 				A8B7D1071F6ABAD1006AEA2B /* PTSingleChoiceConditionalQuestionTypeTests.swift in Sources */,
 				A8B7D0FE1F6AB3A3006AEA2B /* PTQuestionnaireViewInterface.swift in Sources */,
-				A8B7D1031F6AB86C006AEA2B /* TestQuestionTypeEventsHandler.swift in Sources */,
 				A8B7D0F91F6AB2E1006AEA2B /* PTQuestionnaireDataInterface.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

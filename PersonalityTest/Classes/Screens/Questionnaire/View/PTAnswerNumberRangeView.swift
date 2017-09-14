@@ -15,25 +15,11 @@ class PTAnswerNumberRangeView: PTAnswersView {
 	@IBOutlet fileprivate var slider: UISlider!
 	@IBOutlet fileprivate var titleLabel: UILabel!
 	override var intrinsicContentSize: CGSize {
+        layoutIfNeeded()
 		return CGSize(width: UIViewNoIntrinsicMetric,
-		              height: titleLabel.frame.maxX + 2 * margins)
+		              height: titleLabel.frame.height + slider.frame.height + 3 * margins)
 	}
 	
-	
-	// MARK: Initializer
-	
-	override init(frame: CGRect) {
-		super.init(frame: frame)
-		slider.sizeToFit()
-		slider.addTarget(self,
-		                 action: #selector(sliderAction),
-		                 for: .valueChanged)
-		addSubview(slider)
-	}
-	
-	required init?(coder aDecoder: NSCoder) {
-		fatalError("init(coder:) has not been implemented")
-	}
 	
 	static func loadView() -> PTAnswerNumberRangeView {
 		let nib = UINib(nibName: "PTAnswerNumberRangeView",

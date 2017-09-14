@@ -28,26 +28,21 @@ class PTNumberRangeQuestionTypeTests: XCTestCase {
     // MARK: -
 	
 	func test_validate() {
-		let answer = PTQuestionAnswer(with: 15)
-		type.validate(answer: answer)
+        let _ = type.validate(value: 22)
 		
 		XCTAssertNotNil(type.question.answered,
 		                "this answer is valid")
 	}
 	
 	func test_validate_fail() {
-		let answer = PTQuestionAnswer(with: 61)
-		let eventHandler = TestQuestionTypeEventsHandler()
-		
-		type.eventsHandler = eventHandler
-		type.validate(answer: answer)
+		let result = type.validate(value: 61)
 		
 		XCTAssertNil(type.question.answered,
 		             "this answer is invalid")
 		
 		let exp = expectation(description: #function)
 		
-		switch eventHandler.isCalled {
+		switch result {
 		case .reload:
 			exp.fulfill()
 		default:

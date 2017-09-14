@@ -33,7 +33,7 @@ class PTNumberRangeQuestionType: PTSingleChoiceQuestionType {
 		let range: [String: Int] = questionTypeDict.any("range")
 		let from = range["from"] ?? 0
 		let to = range["to"] ?? 1
-		self.range = from..<(to + 1)
+		self.range = from..<(to+1)
         super.init(with: json)
         self.type = .numberRange(self.range)
 		
@@ -42,11 +42,12 @@ class PTNumberRangeQuestionType: PTSingleChoiceQuestionType {
     
     // MARK: Actions
     
-    override func validate(answer: PTQuestionAnswer) {
-		if let value = answer.value, range.contains(value) {
-			question.answered = answer
+    override func validate(value: Int) -> PRQuestionTypeEvents {
+		if range.contains(value) {
+			question.answered = PTQuestionAnswer(with: value)
+            return .none
 		} else {
-			eventsHandler.reload()
+			return .reload
 		}
     }
 }

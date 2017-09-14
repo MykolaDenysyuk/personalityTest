@@ -27,7 +27,6 @@ class PTSingleChoiceQuestionType: PRQuestionTypeInterface {
     var question: PTQuestion
     var type: PTQuestionTypes
     var answers: [PTQuestionAnswer]
-    var eventsHandler: PRQuestionTypeEvents!
     
     // MARK: Initializer
     
@@ -42,8 +41,9 @@ class PTSingleChoiceQuestionType: PRQuestionTypeInterface {
     
     // MARK: Actions
     
-    func validate(answer: PTQuestionAnswer) {
-        question.answered = answer
+    func validate(value: Int) -> PRQuestionTypeEvents {
+        question.answered = answers[value]
+        return .none
     }
     
 }

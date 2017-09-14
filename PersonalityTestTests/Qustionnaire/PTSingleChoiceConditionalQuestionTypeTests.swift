@@ -13,14 +13,12 @@ class PTSingleChoiceConditionalQuestionTypeTests: XCTestCase {
 	var type: PTSingleChoiceConditionalQuestionType!
 	let json = QuestionTypeJSONs.conditionChoice
 	var factory: TestQuestionTypeFactory!
-	var eventsHandler: TestQuestionTypeEventsHandler!
 	
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
 		factory = TestQuestionTypeFactory()
 		factory.type = PTNumberRangeQuestionType(with: QuestionTypeJSONs.numberRange)
-		eventsHandler = TestQuestionTypeEventsHandler()
 		type = PTSingleChoiceConditionalQuestionType(with: json,
 		                                             and: factory)!
     }
@@ -34,23 +32,19 @@ class PTSingleChoiceConditionalQuestionTypeTests: XCTestCase {
 	// MARK: -
 	
 	func test_validate() {
-		let answer = PTQuestionAnswer(with: "this one should pass")
-		type.eventsHandler = eventsHandler
 		
-		type.validate(answer: answer)
+		let _ = type.validate(value: 1)
 		
 		XCTAssertNotNil(type.question.answered,
 		                "the question should be answered at this point since the answer is valid")
 	}
 	
 	func test_addNewQuestion() {
-		let answer = PTQuestionAnswer(with: "this one should pass")
-		type.eventsHandler = eventsHandler
 		
-		type.validate(answer: answer)
+		let result = type.validate(value: 1)
 		
 		let exp = expectation(description: #function)
-		switch eventsHandler.isCalled {
+		switch result {
 		case .addNew(let newQuestionType):
 			XCTAssertEqual(newQuestionType.question.title,
 			               type.relatedQuestion.question.title,
@@ -65,17 +59,14 @@ class PTSingleChoiceConditionalQuestionTypeTests: XCTestCase {
 	}
 	
 	func test_addNewQuestionTwice() {
-		let answer = PTQuestionAnswer(with: "this one should pass")
-		type.eventsHandler = eventsHandler
-		type.validate(answer: answer)
 		
-		eventsHandler.reset()
+		let _ = type.validate(value: 1)
 		
-		type.validate(answer: answer)
+		let result = type.validate(value: 1)
 		
 		let exp = expectation(description: #function)
-		switch eventsHandler.isCalled {
-		case .not:
+		switch result {
+		case .none:
 			exp.fulfill()
 		default:
 			XCTFail("same answer should not be applied more then once")
@@ -86,17 +77,13 @@ class PTSingleChoiceConditionalQuestionTypeTests: XCTestCase {
 	}
 	
 	func test_removeQuestion() {
-		let valid = PTQuestionAnswer(with: "this one should pass")
-		let invalid = PTQuestionAnswer(with: "and this one should not")
-		type.eventsHandler = eventsHandler
 		
-		type.validate(answer: valid)
-		eventsHandler.reset()
-		
-		type.validate(answer: invalid)
+		let _ = type.validate(value: 1)
+				
+		let result = type.validate(value: 0)
 		
 		let exp = expectation(description: #function)
-		switch eventsHandler.isCalled {
+		switch result {
 		case .remove(let questionType):
 			XCTAssertEqual(questionType.question.title,
 			               type.relatedQuestion.question.title,
@@ -111,21 +98,15 @@ class PTSingleChoiceConditionalQuestionTypeTests: XCTestCase {
 	}
 	
 	func test_removeQuestion_twice() {
-		let valid = PTQuestionAnswer(with: "this one should pass")
-		let invalid = PTQuestionAnswer(with: "and this one should not")
-		type.eventsHandler = eventsHandler
 		
-		type.validate(answer: valid)
-		eventsHandler.reset()
+		let _ = type.validate(value: 1)
+		let _ = type.validate(value: 0)
 		
-		type.validate(answer: invalid)
-		eventsHandler.reset()
-		
-		type.validate(answer: invalid)
+		let result = type.validate(value: 0)
 		
 		let exp = expectation(description: #function)
-		switch eventsHandler.isCalled {
-		case .not:
+		switch result {
+		case .none:
 			
 			exp.fulfill()
 		default:

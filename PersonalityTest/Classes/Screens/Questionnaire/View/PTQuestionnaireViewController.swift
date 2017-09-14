@@ -39,20 +39,16 @@ class PTQuestionnaireViewController: UIViewController {
         super.viewWillAppear(animated)
         eventsHandler?.viewRequiresData(self)
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-    }
 
 	override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
 		super.viewWillTransition(to: size,
 		                         with: coordinator)
 		collectionView.collectionViewLayout.invalidateLayout()
 		coordinator.animate(alongsideTransition: { _ in
-			self.collectionView.layoutIfNeeded()
-			self.layout.invalidate()
-		}, completion: nil)
+        }, completion: { _ in
+            self.layout.invalidate()
+            self.collectionView.collectionViewLayout.invalidateLayout()
+        })
 	}
 	
 }
@@ -101,6 +97,7 @@ extension PTQuestionnaireViewController: UICollectionViewDataSource, UICollectio
         case .answers(let type):
             let cell: PTAnswersViewCell = dequeueCell(with: cellIdentifier.answers)
             cell.setup(with: type)
+            cell.answerDelegate = self
             return cell
         }
     }
@@ -151,19 +148,20 @@ extension PTQuestionnaireViewController: PTQuestionnaireViewIntput {
     
     func reloadCategory(at index: Int) {
 		DispatchQueue.main.async {
-			
+            self.collectionView.reloadSections([index])
 		}
-        collectionView.reloadSections([index])
     }
     
     func insertNewQuestions(at indexes: [IndexPath]) {
 		DispatchQueue.main.async {
-			
+            self.layout.invalidate()
+			self.collectionView.insertItems(at: indexes)
 		}
     }
     
     func removeQuestions(at indexes: [IndexPath]) {
 		DispatchQueue.main.async {
+            self.layout.invalidate()
 			self.collectionView.deleteItems(at: indexes)
 		}
     }

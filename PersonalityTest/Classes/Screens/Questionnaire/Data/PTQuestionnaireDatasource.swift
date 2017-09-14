@@ -15,8 +15,13 @@ class PTQuestionnaireDatasource: NSObject {
 	
 	struct Category {
 		let title: String
-		let items: [PTQuestionnaireViewItem]
+		var items: [ItemWrapper]
 	}
+    
+    struct ItemWrapper {
+        var viewItem: PTQuestionnaireViewItem
+        let dataItem: PRQuestionTypeInterface
+    }
 	
 	
 	// MARK: Vars
@@ -25,6 +30,7 @@ class PTQuestionnaireDatasource: NSObject {
 	var questionTypesFactory: PTQuestionTypeFactoryInterface
 		= PTQuestionTypeFactory()
 	
+    
 	// MARK: Actions
 	
 	func loadQuestions(_ complete: @escaping () -> ()) {
@@ -48,14 +54,16 @@ class PTQuestionnaireDatasource: NSObject {
 
 	func wrapIntoCategories(_ response: PTGetQuestionsResponse) {
 		
-		var questionsPerCategory = [PTQuestionCategories: [PTQuestionnaireViewItem]]()
+		var questionsPerCategory = [PTQuestionCategories: [ItemWrapper]]()
 		
 		func appendIntoApproptiateCategory(_ q: PRQuestionTypeInterface) {
 			let key = q.question.category
 			var list = questionsPerCategory[key] ?? []
 			
-			list.append(PTQuestionnaireViewItem.questionItem(q))
-			list.append(PTQuestionnaireViewItem.answerItem(q))
+			list.append(ItemWrapper(viewItem: PTQuestionnaireViewItem.questionItem(q),
+			                        dataItem: q))
+			list.append(ItemWrapper(viewItem: PTQuestionnaireViewItem.answerItem(q),
+			                        dataItem: q))
 			
 			questionsPerCategory[key] = list
 		}
@@ -93,7 +101,7 @@ extension PTQuestionnaireDatasource: PTQuestionnaireViewDatasourceInterface {
 	}
 	
 	func question(at index: IndexPath) -> PTQuestionnaireViewItem {
-		return categories[index.section].items[index.row]
+		return categories[index.section].items[index.row].viewItem
 	}
 }
 
@@ -105,7 +113,38 @@ extension PTQuestionnaireDatasource: PTQuestionnaireViewOutput {
 	}
 	
 	func view(_ view: PTQuestionnaireViewIntput, didSelectAnswer: Int, forQuestionAt index: IndexPath) {
-		// todo
+        var category = categories[index.section]
+		var item = category.items[index.item]
+        let oldQuestionValue = item.dataItem
+        let result = item.dataItem.validate(value: didSelectAnswer)
+        item.viewItem = PTQuestionnaireViewItem.answerItem(item.dataItem)
+        category.items[index.item] = item
+        categories[index.section] = category
+        switch result {
+        case .addNew(let q):
+            category.items.insert(ItemWrapper(viewItem: PTQuestionnaireViewItem.questionItem(q),
+                                              dataItem: q),
+                                  at: index.item + 1)
+            category.items.insert(ItemWrapper(viewItem: PTQuestionnaireViewItem.answerItem(q),
+                                              dataItem: q),
+                                  at: index.item + 2)
+            categories[index.section] = category
+            view.insertNewQuestions(at: [IndexPath(item: index.item+1, section: index.section),
+                                         IndexPath(item: index.item+2, section: index.section)])
+        case .remove(_):
+            category.items.remove(at: index.item+2)
+            category.items.remove(at: index.item+1)
+            categories[index.section] = category
+            view.removeQuestions(at: [IndexPath(item: index.item+1, section: index.section),
+                                      IndexPath(item: index.item+2, section: index.section)])
+        case .reload:
+            item.viewItem = PTQuestionnaireViewItem.answerItem(oldQuestionValue)
+            category.items[index.section] = item
+            categories[index.section] = category
+            view.reloadQuestions(at: [index])
+        case .none:
+            break
+        }
 	}
 }
 
@@ -120,12 +159,12 @@ extension PTQuestionnaireViewItem {
 		switch question.type {
 		case .numberRange(let range):
 			return PTQuestionnaireViewItem(type: .answers(.numberRange(range: range,
-			                                                           current: nil)))
+			                                                           current: question.question.answered?.value)))
 		
 		case .singleChoiceConditional(let answers), .singleChoice(let answers):
-			let _answers = answers.map {Answer(title: $0.title, isSelected: false)}
+			let _answers = answers.map {Answer(title: $0.title, isSelected: $0.title == question.question.answered?.title)}
 			return PTQuestionnaireViewItem(type: .answers(.singleChoice(answers: _answers)))		
 		}
 	}
-	
+    
 }

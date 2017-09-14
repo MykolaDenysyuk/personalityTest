@@ -70,20 +70,25 @@ class PTSingleChoiceConditionalQuestionType: PTSingleChoiceQuestionType {
     
     // MARK: Actions
     
-    override func validate(answer: PTQuestionAnswer) {
+    override func validate(value: Int) -> PRQuestionTypeEvents {
+        let answer = answers[value]
 		if let lastAnswer = question.answered?.title, lastAnswer == answer.title {
-			return
+			return .none
 		}
+        
+        var result = PRQuestionTypeEvents.none
+        
 		if predicate.validate(with: answer.title) {
-			eventsHandler.addNew(question: relatedQuestion)
+			 result = .addNew(relatedQuestion)
 			isRelatedQuestionShown = true
 		} else {
 			if isRelatedQuestionShown {
 				isRelatedQuestionShown = false
-				eventsHandler.remove(question: relatedQuestion)
+				result = .remove(relatedQuestion)
 			}
 		}
 		question.answered = answer
+        return result
     }
     
 }

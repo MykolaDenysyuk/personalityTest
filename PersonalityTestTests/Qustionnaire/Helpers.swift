@@ -14,8 +14,10 @@ struct QuestionTypeJSONs {
 		"category": "hard_fact",
 		"question_type": [
 			"type": "number_range",
-			"from": 20,
-			"to": 40
+			"range": [
+                "from": 20,
+                "to": 40
+            ]
 		]
 	]
 	static let conditionChoice: [String: Any] = [
@@ -32,7 +34,7 @@ struct QuestionTypeJSONs {
 				"predicate": [
 					"exactEquals": [
 						"${selection}",
-						"this one should pass"
+						"important"
 					]
 				],
 				"if_positive": QuestionTypeJSONs.numberRange
