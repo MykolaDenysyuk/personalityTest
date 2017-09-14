@@ -76,11 +76,17 @@ extension PTQuestionnaireViewLayout {
     
     class RegularRow: CompactRow {
         override var leftSide: CGFloat {
-            set {super.leftSide = max(newValue, rightSide)}
+            set {
+                super.leftSide = max(newValue, rightSide)
+                super.rightSide = self.leftSide
+            }
             get {return super.leftSide}
         }
         override var rightSide: CGFloat {
-            set {super.rightSide = max(newValue, leftSide)}
+            set {
+                super.rightSide = max(newValue, leftSide)
+                super.leftSide = self.rightSide 
+            }
             get {return super.rightSide}
         }
     }
