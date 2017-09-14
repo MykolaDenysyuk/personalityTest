@@ -18,16 +18,24 @@ enum PTQuestionCategories: String {
 }
 
 enum PTQuestionTypes: String {
-    case unknown
     case singleChoice = "single_choice"
     case singleChoiceConditional = "single_choice_conditional"
     case numberRange = "number_range"
 }
 
+protocol PRQuestionTypeEvents: class {
+    func addNew(question: PTQuestion)
+    func remove(question: PTQuestion)
+    func reload()
+}
+
 protocol PRQuestionTypeInterface {
+    var question: PTQuestion {get}
     var type: PTQuestionTypes {get}
     var answers: [PTQuestionAnswer] {get}
-    func validate(answer: PTQuestionAnswer) -> Bool
+    var eventsHandler: PRQuestionTypeEvents! {get set}
+    
+    func validate(answer: PTQuestionAnswer)
 }
 
 struct PTQuestionAnswer {
@@ -38,9 +46,9 @@ struct PTQuestionAnswer {
 struct PTQuestion {
     let title: String
     let category: PTQuestionCategories
-    let type: PTQuestionTypes
-    let answered: PTQuestionAnswer?
+    var answered: PTQuestionAnswer?
 }
 
-
-
+protocol PTQuestionTypeFactoryInterface {
+    func questionType(for json: Any) -> PRQuestionTypeInterface?
+}
