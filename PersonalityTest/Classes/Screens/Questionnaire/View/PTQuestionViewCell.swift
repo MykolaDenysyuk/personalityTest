@@ -14,11 +14,11 @@ class PTQuestionViewCell: PTCollectionViewCell {
 	
 	override func layoutSubviews() {
 		super.layoutSubviews()
-		let desiredHeight = titleLabel.frame.maxY + titleLabel.frame.origin.y
-//		if desiredHeight != contentView.bounds.height {
-//			delegate?.cell(self,
-//			               requireNewHeight: desiredHeight)
-//		}
+		let desiredHeight = ceil(titleLabel.frame.maxY + titleLabel.frame.origin.y)
+		if desiredHeight != ceil(contentView.bounds.height) {
+			delegate?.cell(self,
+			               requireNewHeight: desiredHeight)
+		}
 	}
 	
     func setup(with title: String) {

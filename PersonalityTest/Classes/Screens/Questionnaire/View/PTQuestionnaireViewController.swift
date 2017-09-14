@@ -60,7 +60,7 @@ class PTQuestionnaireViewController: UIViewController {
 extension PTQuestionnaireViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-		return layout.sizeForItem(at: indexPath.item)
+		return layout.sizeForItem(at: indexPath)
     }
 	
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -109,19 +109,18 @@ extension PTQuestionnaireViewController: UICollectionViewDataSource, UICollectio
         if let cell = cell as? PTCollectionViewCell {
             cell.delegate = self
         }
+        cell.setNeedsLayout()
     }
-	
-	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-		collectionView.reloadItems(at: [indexPath])
-	}
     
 }
 
 extension PTQuestionnaireViewController: PTCollectionViewCellDelegate {
     func cell(_ cell: PTCollectionViewCell, requireNewHeight: CGFloat) {
         if let index = collectionView.indexPath(for: cell) {
-            layout.update(height: requireNewHeight, forItemAt: index.item)
-			collectionView.reloadItems(at: [index])
+            layout.update(height: requireNewHeight, forItemAt: index)
+            UIView.performWithoutAnimation {
+                self.collectionView.reloadItems(at: [index])
+            }
         }
     }
 }

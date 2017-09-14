@@ -36,8 +36,8 @@ class PTAnswersViewCell: PTCollectionViewCell, PTAnswersViewDelegate {
 		
 		if let view = self.container {
 			view.frame = bounds
-			let desiredHeight = view.intrinsicContentSize.height
-			if desiredHeight != bounds.size.height {
+			let desiredHeight = ceil(view.intrinsicContentSize.height)
+			if desiredHeight != ceil(bounds.size.height) {
 				delegate?.cell(self,
 				               requireNewHeight: desiredHeight)
 			}
@@ -58,7 +58,6 @@ class PTAnswersViewCell: PTCollectionViewCell, PTAnswersViewDelegate {
 			optionsView.setup(with: answers)
 			container = optionsView
 		}
-		setNeedsLayout()
     }
 	
 	func didSelectAnswer(index: Int) {
