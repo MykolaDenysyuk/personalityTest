@@ -29,12 +29,6 @@ struct PTQuestionnaireViewItem {
 }
 
 
-struct PTAnswer {
-    let title: String
-    let isSelected: Bool
-}
-
-
 protocol PTQuestionnaireViewIntput {
     func reload()
     func reloadQuestions(at indexes: [IndexPath])

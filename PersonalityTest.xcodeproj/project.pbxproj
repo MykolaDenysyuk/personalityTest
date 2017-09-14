@@ -26,6 +26,7 @@
 		6F016A301F69B4A400611BBB /* PTQuestionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F016A2F1F69B4A400611BBB /* PTQuestionViewCell.swift */; };
 		6F016A321F69B64E00611BBB /* PTAnswersViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F016A311F69B64E00611BBB /* PTAnswersViewCell.swift */; };
 		6F016A351F69BB6200611BBB /* PTCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F016A341F69BB6200611BBB /* PTCollectionViewCell.swift */; };
+		6F016A3A1F6A503B00611BBB /* PTNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F016A391F6A503B00611BBB /* PTNetworkManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,7 @@
 		6F016A2F1F69B4A400611BBB /* PTQuestionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTQuestionViewCell.swift; sourceTree = "<group>"; };
 		6F016A311F69B64E00611BBB /* PTAnswersViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTAnswersViewCell.swift; sourceTree = "<group>"; };
 		6F016A341F69BB6200611BBB /* PTCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTCollectionViewCell.swift; sourceTree = "<group>"; };
+		6F016A391F6A503B00611BBB /* PTNetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTNetworkManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,7 +200,7 @@
 			isa = PBXGroup;
 			children = (
 				6F016A331F69BB5700611BBB /* Helpers */,
-				6F016A251F69AFB900611BBB /* Extensions */,
+				6F016A381F6A501A00611BBB /* NetworkManager */,
 				6F016A201F69AF8C00611BBB /* Services */,
 			);
 			path = System;
@@ -234,13 +236,6 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
-		6F016A251F69AFB900611BBB /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
 		6F016A261F69B06800611BBB /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
@@ -255,6 +250,14 @@
 				6F016A341F69BB6200611BBB /* PTCollectionViewCell.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		6F016A381F6A501A00611BBB /* NetworkManager */ = {
+			isa = PBXGroup;
+			children = (
+				6F016A391F6A503B00611BBB /* PTNetworkManager.swift */,
+			);
+			path = NetworkManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -408,6 +411,7 @@
 				6F016A351F69BB6200611BBB /* PTCollectionViewCell.swift in Sources */,
 				6F0169E41F68765A00611BBB /* PTQuestionnaireViewInterface.swift in Sources */,
 				6F0169DA1F686EAE00611BBB /* AppDelegate.swift in Sources */,
+				6F016A3A1F6A503B00611BBB /* PTNetworkManager.swift in Sources */,
 				6F0169E71F687A5400611BBB /* PTQuestionnaireDataInterface.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

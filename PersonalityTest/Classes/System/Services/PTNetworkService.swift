@@ -17,10 +17,10 @@ typealias PTNetworkResponseCallback = (PTNetworkResponse) -> ()
 
 protocol PTNetworkService: PTService {
     func get(path: String,
-             onComplete block: PTNetworkResponseCallback)
+             onComplete block: @escaping PTNetworkResponseCallback)
     func post(path: String,
               parameters: [String: String],
-              onComplete block: PTNetworkResponseCallback)
+              onComplete block: @escaping PTNetworkResponseCallback)
 }
 
 

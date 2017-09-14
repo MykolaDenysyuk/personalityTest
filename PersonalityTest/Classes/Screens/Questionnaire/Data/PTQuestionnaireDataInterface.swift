@@ -26,19 +26,20 @@ enum PTQuestionTypes: String {
 
 protocol PRQuestionTypeInterface {
     var type: PTQuestionTypes {get}
-    var answers: [PTQuestionAnswerInterface] {get}
-    func validate(answer: PTQuestionAnswerInterface) -> Bool
+    var answers: [PTQuestionAnswer] {get}
+    func validate(answer: PTQuestionAnswer) -> Bool
 }
 
-protocol PTQuestionAnswerInterface {
-    var title: String {get}
+struct PTQuestionAnswer {
+    let title: String
+    let value: Int?
 }
 
-protocol PTQuestionInterface {
-    var title: String {get}
-    var category: PTQuestionCategories {get}
-    var type: PRQuestionTypeInterface {get}
-    var answered: PTQuestionAnswerInterface? {get set}
+struct PTQuestion {
+    let title: String
+    let category: PTQuestionCategories
+    let type: PTQuestionTypes
+    let answered: PTQuestionAnswer?
 }
 
 
