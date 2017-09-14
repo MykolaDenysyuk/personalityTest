@@ -14,7 +14,8 @@ class PTAnswerOptionsView: PTAnswersView {
 	
 	fileprivate var answerViews = [UILabel]()
 	override var intrinsicContentSize: CGSize {
-		let height = answerViews.last?.frame.height ?? 0
+		layoutIfNeeded()
+		let height = answerViews.last?.frame.maxY ?? 0
 		return CGSize(width: UIViewNoIntrinsicMetric,
 		              height: height + margins)
 	}

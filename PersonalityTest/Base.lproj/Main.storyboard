@@ -40,7 +40,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What is your best jetpack experience ever?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k5l-jc-oQC" userLabel="Title label">
-                                                    <rect key="frame" x="8" y="8" width="304" height="44"/>
+                                                    <rect key="frame" x="8" y="8" width="304" height="42.5"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -49,7 +49,6 @@
                                         </view>
                                         <constraints>
                                             <constraint firstAttribute="trailingMargin" secondItem="k5l-jc-oQC" secondAttribute="trailing" id="AKr-rl-5Ed"/>
-                                            <constraint firstAttribute="bottomMargin" secondItem="k5l-jc-oQC" secondAttribute="bottom" id="BxE-qb-hM4"/>
                                             <constraint firstItem="k5l-jc-oQC" firstAttribute="top" secondItem="ndi-Yz-Sqz" secondAttribute="topMargin" id="Ikc-0z-n8m"/>
                                             <constraint firstItem="k5l-jc-oQC" firstAttribute="leading" secondItem="ndi-Yz-Sqz" secondAttribute="leadingMargin" id="d82-2I-a5e"/>
                                         </constraints>

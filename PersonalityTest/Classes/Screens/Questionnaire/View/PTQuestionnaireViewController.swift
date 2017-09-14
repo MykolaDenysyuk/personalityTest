@@ -28,7 +28,10 @@ class PTQuestionnaireViewController: UIViewController {
     }
     var datasource: PTQuestionnaireViewDatasourceInterface!
     weak var eventsHandler: PTQuestionnaireViewOutput?
-    
+	lazy var layout: PTQuestionnaireViewLayout = {
+		return PTQuestionnaireViewLayout(container: self.collectionView)
+	}()
+	
     
     // MARK: View lifecycle
     
@@ -39,14 +42,16 @@ class PTQuestionnaireViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
     }
 
 	override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+		super.viewWillTransition(to: size,
+		                         with: coordinator)
 		collectionView.collectionViewLayout.invalidateLayout()
 		coordinator.animate(alongsideTransition: { _ in
 			self.collectionView.layoutIfNeeded()
+			self.layout.invalidate()
 		}, completion: nil)
 	}
 	
@@ -55,15 +60,7 @@ class PTQuestionnaireViewController: UIViewController {
 extension PTQuestionnaireViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-		let contentWidth = collectionView.frame.width
-        if traitCollection.horizontalSizeClass == .compact {
-            return CGSize(width: contentWidth,
-                          height: 60)
-        }
-        else {
-            return CGSize(width: contentWidth/2,
-                          height: 60)
-        }
+		return layout.sizeForItem(at: indexPath.item)
     }
 	
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -113,13 +110,18 @@ extension PTQuestionnaireViewController: UICollectionViewDataSource, UICollectio
             cell.delegate = self
         }
     }
+	
+	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+		collectionView.reloadItems(at: [indexPath])
+	}
     
 }
 
 extension PTQuestionnaireViewController: PTCollectionViewCellDelegate {
     func cell(_ cell: PTCollectionViewCell, requireNewHeight: CGFloat) {
         if let index = collectionView.indexPath(for: cell) {
-            // todo: apply new height for both question and answer cells
+            layout.update(height: requireNewHeight, forItemAt: index.item)
+			collectionView.reloadItems(at: [index])
         }
     }
 }
