@@ -31,7 +31,7 @@ class PTQuestionnaireCoordinator {
     }
 	
 	fileprivate func createController() -> PTQuestionnaireViewController {
-		if let ret = UIStoryboard(name: "Main", bundle: nil)
+		if let ret = PTServices.storyboards.main
 			.instantiateViewController(withIdentifier: "Questionnaire") as? PTQuestionnaireViewController {
 			let datasource = PTQuestionnaireDatasource()
 			ret.datasource = datasource
@@ -43,8 +43,8 @@ class PTQuestionnaireCoordinator {
 	}
     
     fileprivate func createResultsController() -> PTQuestionnaireResultsViewController {
-        if let ret = UIStoryboard(name: "Main", bundle: nil)
-            .instantiateViewController(withIdentifier: "Results") as? PTQuestionnaireResultsViewController {            
+        if let ret = PTServices.storyboards.main
+			.instantiateViewController(withIdentifier: "Results") as? PTQuestionnaireResultsViewController {
             ret.coordinator = self
             return ret
         }

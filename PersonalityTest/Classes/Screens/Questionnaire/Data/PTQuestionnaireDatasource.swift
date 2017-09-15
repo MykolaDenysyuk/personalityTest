@@ -34,6 +34,7 @@ class PTQuestionnaireDatasource: NSObject {
 	// MARK: Actions
 	
 	func loadQuestions(_ complete: @escaping () -> ()) {
+		answeredQuestionsCount = 0
 		PTServices.network.get(path: "quesitions") { [weak self]
 			(networkResponse) in
 			if let sself = self {
@@ -134,6 +135,7 @@ extension PTQuestionnaireDatasource: PTQuestionnaireViewOutput {
 	func viewRequiresData(_ view: PTQuestionnaireViewIntput) {
 		self.loadQuestions {
 			view.reload()
+			view.showSubmit(self.answeredQuestionsCount > 0)
 		}
 	}
 	

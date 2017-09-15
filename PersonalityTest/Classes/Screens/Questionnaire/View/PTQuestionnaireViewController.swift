@@ -34,13 +34,17 @@ class PTQuestionnaireViewController: UIViewController {
 		return PTQuestionnaireViewLayout(container: self.collectionView)
 	}()
     var coordinator: PTQuestionnaireCoordinatorInterface!
+	var didRequestData = false
 	
     
     // MARK: View lifecycle
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        eventsHandler?.viewRequiresData(self)
+		if !didRequestData {
+			didRequestData = true
+			eventsHandler?.viewRequiresData(self)
+		}
     }
 
 	override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -124,10 +128,13 @@ extension PTQuestionnaireViewController: UICollectionViewDataSource, UICollectio
 extension PTQuestionnaireViewController: PTCollectionViewCellDelegate {
     func cell(_ cell: PTCollectionViewCell, requireNewHeight: CGFloat) {
         if let index = collectionView.indexPath(for: cell) {
-            layout.update(height: requireNewHeight, forItemAt: index)
-            UIView.performWithoutAnimation {
-                self.collectionView.reloadItems(at: [index])
-            }
+			func perfom() {
+				layout.update(height: requireNewHeight, forItemAt: index)
+				UIView.performWithoutAnimation {
+					self.collectionView.reloadItems(at: [index])
+				}
+			}
+			DispatchQueue.main.async(execute: perfom)
         }
     }
 }
@@ -177,17 +184,20 @@ extension PTQuestionnaireViewController: PTQuestionnaireViewIntput {
     }
     
     func showSubmit(_ isShow: Bool) {
-        submitButtonBottomMargin.constant = isShow ? 0 : -submitButton.frame.height
-        var insets = collectionView.contentInset
-        insets.bottom = isShow ? submitButton.frame.height : 0
-        collectionView.contentInset = insets
-        collectionView.scrollIndicatorInsets = insets
-        UIView.animate(withDuration: 0.25,
-                       delay: 0,
-                       options: .curveEaseIn,
-                       animations: { 
-                        self.view.layoutIfNeeded()
-        }, completion: nil)
+		func perform() {
+			submitButtonBottomMargin.constant = isShow ? 0 : -submitButton.frame.height
+			var insets = collectionView.contentInset
+			insets.bottom = isShow ? submitButton.frame.height : 0
+			collectionView.contentInset = insets
+			collectionView.scrollIndicatorInsets = insets
+			UIView.animate(withDuration: 0.25,
+			               delay: 0,
+			               options: .curveEaseIn,
+			               animations: {
+							self.view.layoutIfNeeded()
+			}, completion: nil)
+		}
+		DispatchQueue.main.async(execute: perform)
     }
-    
+	
 }

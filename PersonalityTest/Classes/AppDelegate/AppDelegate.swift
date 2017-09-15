@@ -56,6 +56,7 @@ extension AppDelegate {
 	
 	func setupDependencies() {
 		PTServices.setService(PTNetworkManager())
+		PTServices.setService(PTStoryboardManager())
 	}
 	
 }
