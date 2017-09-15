@@ -44,6 +44,6 @@ extension PTQuestionAnswer {
     
     init(with int: Int) {
         value = int
-        title = ""
+        title = "\(int)"
     }
 }

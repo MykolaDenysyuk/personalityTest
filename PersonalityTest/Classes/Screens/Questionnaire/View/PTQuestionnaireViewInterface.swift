@@ -28,6 +28,7 @@ struct PTQuestionnaireViewItem {
     let type: Types
 }
 
+typealias PTQuestionnaireResult = (category: String, results: [(question: String, answer: String)])
 
 protocol PTQuestionnaireViewIntput {
     func reload()
@@ -35,6 +36,7 @@ protocol PTQuestionnaireViewIntput {
     func reloadCategory(at index: Int)
     func insertNewQuestions(at indexes: [IndexPath])
     func removeQuestions(at indexes: [IndexPath])
+    func showSubmit(_ isShow: Bool)
 }
 
 protocol PTQuestionnaireViewOutput: class {
@@ -49,4 +51,5 @@ protocol PTQuestionnaireViewDatasourceInterface {
     func title(for category: Int) -> String
     func numberOfQuestions(in category: Int) -> Int
     func question(at index: IndexPath) -> PTQuestionnaireViewItem
+    func result() -> [PTQuestionnaireResult]
 }

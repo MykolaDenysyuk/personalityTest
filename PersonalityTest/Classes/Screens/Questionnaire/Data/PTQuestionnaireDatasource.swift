@@ -29,7 +29,7 @@ class PTQuestionnaireDatasource: NSObject {
 	var categories = [Category]()
 	var questionTypesFactory: PTQuestionTypeFactoryInterface
 		= PTQuestionTypeFactory()
-	
+	var answeredQuestionsCount = 0
     
 	// MARK: Actions
 	
@@ -64,6 +64,9 @@ class PTQuestionnaireDatasource: NSObject {
 			                        dataItem: q))
 			list.append(ItemWrapper(viewItem: PTQuestionnaireViewItem.answerItem(q),
 			                        dataItem: q))
+            if q.question.answered != nil {
+                answeredQuestionsCount += 1
+            }
 			
 			questionsPerCategory[key] = list
 		}
@@ -103,6 +106,28 @@ extension PTQuestionnaireDatasource: PTQuestionnaireViewDatasourceInterface {
 	func question(at index: IndexPath) -> PTQuestionnaireViewItem {
 		return categories[index.section].items[index.row].viewItem
 	}
+    
+    func result() -> [PTQuestionnaireResult] {
+        if answeredQuestionsCount > 0 {
+            var all = [PTQuestionnaireResult]()
+            for c in categories {
+                var answers = [(String, String)]()
+                for q in c.items {
+                    if let answer = q.dataItem.question.answered {
+                        answers.append((q.dataItem.question.title,
+                                        answer.title))
+                    }
+                }
+                if answers.count > 0 {
+                    all.append((c.title, answers))
+                }
+            }
+            return all
+        }
+        else {
+            return []
+        }
+    }
 }
 
 extension PTQuestionnaireDatasource: PTQuestionnaireViewOutput {
@@ -120,8 +145,10 @@ extension PTQuestionnaireDatasource: PTQuestionnaireViewOutput {
         item.viewItem = PTQuestionnaireViewItem.answerItem(item.dataItem)
         category.items[index.item] = item
         categories[index.section] = category
+        
         switch result {
         case .addNew(let q):
+            answeredQuestionsCount += 1
             category.items.insert(ItemWrapper(viewItem: PTQuestionnaireViewItem.questionItem(q),
                                               dataItem: q),
                                   at: index.item + 1)
@@ -132,19 +159,24 @@ extension PTQuestionnaireDatasource: PTQuestionnaireViewOutput {
             view.insertNewQuestions(at: [IndexPath(item: index.item+1, section: index.section),
                                          IndexPath(item: index.item+2, section: index.section)])
         case .remove(_):
+            answeredQuestionsCount += 1
             category.items.remove(at: index.item+2)
             category.items.remove(at: index.item+1)
             categories[index.section] = category
             view.removeQuestions(at: [IndexPath(item: index.item+1, section: index.section),
                                       IndexPath(item: index.item+2, section: index.section)])
         case .reload:
+            answeredQuestionsCount += 1
             item.viewItem = PTQuestionnaireViewItem.answerItem(oldQuestionValue)
             category.items[index.section] = item
             categories[index.section] = category
             view.reloadQuestions(at: [index])
         case .none:
+            answeredQuestionsCount += 1
             break
         }
+        
+        view.showSubmit(answeredQuestionsCount > 0)
 	}
 }
 

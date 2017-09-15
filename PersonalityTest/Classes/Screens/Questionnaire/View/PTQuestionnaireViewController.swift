@@ -26,6 +26,8 @@ class PTQuestionnaireViewController: UIViewController {
             collectionView.delegate = self
         }
     }
+    @IBOutlet fileprivate weak var submitButton: UIButton!
+    @IBOutlet fileprivate weak var submitButtonBottomMargin: NSLayoutConstraint!
     var datasource: PTQuestionnaireViewDatasourceInterface!
     weak var eventsHandler: PTQuestionnaireViewOutput?
 	lazy var layout: PTQuestionnaireViewLayout = {
@@ -50,6 +52,10 @@ class PTQuestionnaireViewController: UIViewController {
             self.collectionView.collectionViewLayout.invalidateLayout()
         })
 	}
+    
+    @IBAction func submitButtonAction() {
+        
+    }
 	
 }
 
@@ -164,6 +170,20 @@ extension PTQuestionnaireViewController: PTQuestionnaireViewIntput {
             self.layout.invalidate()
 			self.collectionView.deleteItems(at: indexes)
 		}
+    }
+    
+    func showSubmit(_ isShow: Bool) {
+        submitButtonBottomMargin.constant = isShow ? 0 : -submitButton.frame.height
+        var insets = collectionView.contentInset
+        insets.bottom = isShow ? submitButton.frame.height : 0
+        collectionView.contentInset = insets
+        collectionView.scrollIndicatorInsets = insets
+        UIView.animate(withDuration: 0.25,
+                       delay: 0,
+                       options: .curveEaseIn,
+                       animations: { 
+                        self.view.layoutIfNeeded()
+        }, completion: nil)
     }
     
 }
