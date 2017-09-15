@@ -34,13 +34,6 @@ class PTAnswerNumberRangeView: PTAnswersView {
 	
 	// MARK: Actions
 	
-	override func layoutSubviews() {
-		super.layoutSubviews()
-		slider.frame.size.width = bounds.width - 2 * margins
-		slider.center.x = bounds.midX
-		slider.center.y = bounds.midY
-	}
-	
 	@IBAction fileprivate func sliderAction() {
 		let value = Int(slider.value)
 		delegate?.didSelectAnswer(index: value)
