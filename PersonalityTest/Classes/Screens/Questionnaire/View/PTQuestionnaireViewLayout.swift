@@ -8,17 +8,24 @@
 
 import UIKit
 
+protocol PTLayoutContainerInterface {
+    var frame: CGRect { get }
+    var traitCollection: UITraitCollection { get }
+}
+
+extension UIView: PTLayoutContainerInterface {}
+
 class PTQuestionnaireViewLayout {
 
     // MARK: Vars
     
     fileprivate var sections = [Int: Section]()
-	fileprivate var container: UIView
+	fileprivate var container: PTLayoutContainerInterface
 	
     
     // MARK: Initializer
     
-	init(container: UIView) {
+	init(container: PTLayoutContainerInterface) {
 		self.container = container
 	}
 	
