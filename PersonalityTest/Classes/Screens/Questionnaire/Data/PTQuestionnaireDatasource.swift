@@ -112,8 +112,8 @@ extension PTQuestionnaireDatasource: PTQuestionnaireViewDatasourceInterface {
             var all = [PTQuestionnaireResult]()
             for c in categories {
                 var answers = [(String, String)]()
-                for q in c.items {
-                    if let answer = q.dataItem.question.answered {
+                for (i, q) in c.items.enumerated() {
+                    if let answer = q.dataItem.question.answered, i%2>0 {
                         answers.append((q.dataItem.question.title,
                                         answer.title))
                     }

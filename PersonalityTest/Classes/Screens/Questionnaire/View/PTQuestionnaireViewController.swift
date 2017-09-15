@@ -33,6 +33,7 @@ class PTQuestionnaireViewController: UIViewController {
 	lazy var layout: PTQuestionnaireViewLayout = {
 		return PTQuestionnaireViewLayout(container: self.collectionView)
 	}()
+    var coordinator: PTQuestionnaireCoordinatorInterface!
 	
     
     // MARK: View lifecycle
@@ -54,7 +55,10 @@ class PTQuestionnaireViewController: UIViewController {
 	}
     
     @IBAction func submitButtonAction() {
-        
+        let results = datasource.result()
+        coordinator.showResults(results,
+                                from: self,
+                                sender: submitButton)
     }
 	
 }

@@ -8,6 +8,13 @@
 
 import UIKit
 
+protocol PTQuestionnaireCoordinatorInterface {
+    func showResults(_ result: [PTQuestionnaireResult], from vc: UIViewController, sender: UIView)
+}
+
+protocol PTQuestionnaireResultsCoordinatorInterface: class {
+    func closeResults(sender: UIViewController)
+}
 
 class PTQuestionnaireCoordinator {
 	
@@ -29,9 +36,42 @@ class PTQuestionnaireCoordinator {
 			let datasource = PTQuestionnaireDatasource()
 			ret.datasource = datasource
 			ret.eventsHandler = datasource
+            ret.coordinator = self
 			return ret
 		}
 		fatalError("another view controller is expected")
 	}
     
+    fileprivate func createResultsController() -> PTQuestionnaireResultsViewController {
+        if let ret = UIStoryboard(name: "Main", bundle: nil)
+            .instantiateViewController(withIdentifier: "Results") as? PTQuestionnaireResultsViewController {            
+            ret.coordinator = self
+            return ret
+        }
+        fatalError("another view controller is expected")
+    }
+    
+}
+
+extension PTQuestionnaireCoordinator: PTQuestionnaireCoordinatorInterface {
+    func showResults(_ result: [PTQuestionnaireResult], from vc: UIViewController, sender: UIView) {
+        let controller = createResultsController()
+        controller.results = result
+        let container = UINavigationController(rootViewController: controller)
+        container.modalPresentationStyle = .popover
+        if let popover = container.popoverPresentationController {
+            popover.sourceView = sender
+            popover.sourceRect = sender.bounds
+        }
+        vc.present(container,
+                   animated: true,
+                   completion: nil)
+    }
+}
+
+extension PTQuestionnaireCoordinator: PTQuestionnaireResultsCoordinatorInterface {
+    func closeResults(sender: UIViewController) {
+        sender.dismiss(animated: true,
+                       completion: nil)
+    }
 }
