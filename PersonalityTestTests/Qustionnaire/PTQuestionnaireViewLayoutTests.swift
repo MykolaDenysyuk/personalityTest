@@ -31,7 +31,7 @@ class PTQuestionnaireViewLayoutTests: XCTestCase {
     
     func test_updateSize_regular() {
         container.traitCollection = UITraitCollection(horizontalSizeClass: .regular)
-        let expectedHeight: CGFloat = 189
+        let expectedHeight: CGFloat = PTQuestionnaireViewLayout.RegularRow.defaultQuestionHeigth + 80
         let lowerHeight = expectedHeight/2
         let qIndex = IndexPath(item: 10, section: 18)
         let aIndex = IndexPath(item: 11, section: 18)
@@ -47,7 +47,34 @@ class PTQuestionnaireViewLayoutTests: XCTestCase {
         XCTAssertEqual(questionRowHeiht, answerRowHeight,
                        "both answer and question rows should be same height when view's horizontal size class is regular")
     }
-    
+	
+	func test_updateSize_regular_shouldUpdate() {
+		container.traitCollection = UITraitCollection(horizontalSizeClass: .regular)
+		let biggerHeight = PTQuestionnaireViewLayout.RegularRow.defaultQuestionHeigth + 80
+		let smallerHeight = biggerHeight/2
+		let qIndex = IndexPath(item: 10, section: 18)
+		let aIndex = IndexPath(item: 11, section: 18)
+		
+		let shouldUpdateQuestion = layout.update(height: biggerHeight,
+		              forItemAt: qIndex)
+		let shouldNotUpdateAnswer = layout.update(height: smallerHeight,
+		              forItemAt: aIndex)
+		let shouldNotUpdateQuestion = layout.update(height: biggerHeight - 10,
+		                                            forItemAt: qIndex)
+		let shouldUpdateAnswer = layout.update(height: biggerHeight + 10,
+		                                       forItemAt: aIndex)
+		
+		XCTAssert(shouldUpdateQuestion,
+		          "question view should be updated since it height is bigger then initial")
+		XCTAssert(!shouldNotUpdateAnswer,
+		          "answer view should not be updated since question view has bigger height and the answer should have the same")
+		XCTAssert(!shouldNotUpdateQuestion,
+		          "question view should not be updated with a lower height until the layout is invalidated")
+		XCTAssert(shouldUpdateAnswer,
+		          "answer view should be updated if it has bigger height then question and answer views currently")
+		
+	}
+	
     func test_updateSize_compact() {
         container.traitCollection = UITraitCollection(horizontalSizeClass: .compact)
         let qExpectedHeight: CGFloat = 189

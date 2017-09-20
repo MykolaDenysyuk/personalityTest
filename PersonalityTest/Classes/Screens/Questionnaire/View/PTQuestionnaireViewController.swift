@@ -129,9 +129,10 @@ extension PTQuestionnaireViewController: PTCollectionViewCellDelegate {
     func cell(_ cell: PTCollectionViewCell, requireNewHeight: CGFloat) {
         if let index = collectionView.indexPath(for: cell) {
 			func perfom() {
-				layout.update(height: requireNewHeight, forItemAt: index)
-				UIView.performWithoutAnimation {
-					self.collectionView.reloadItems(at: [index])
+				if layout.update(height: requireNewHeight, forItemAt: index) {
+					UIView.performWithoutAnimation {
+						self.collectionView.reloadItems(at: [index])
+					}
 				}
 			}
 			DispatchQueue.main.async(execute: perfom)

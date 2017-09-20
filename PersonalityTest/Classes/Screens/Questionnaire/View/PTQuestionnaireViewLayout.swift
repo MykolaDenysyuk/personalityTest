@@ -35,16 +35,18 @@ class PTQuestionnaireViewLayout {
 	func invalidate() {
 		sections.removeAll()
 	}
-	
-	func update(height: CGFloat, forItemAt index: IndexPath) {
+	/** returns true if height has actually been updated */
+	@discardableResult
+	func update(height: CGFloat, forItemAt index: IndexPath) -> Bool {
         let row = self.row(at: index)
         
         if index.item % 2 > 0 {
             row.rightSide = height
+			return row.rightSide == height
         } else {
             row.leftSide = height
-        }
-        
+			return row.leftSide == height
+        }        
 	}
 	
 	func sizeForItem(at index: IndexPath) -> CGSize {
@@ -77,8 +79,10 @@ class PTQuestionnaireViewLayout {
 
 extension PTQuestionnaireViewLayout {
     class CompactRow {
-        var leftSide: CGFloat = 30
-        var rightSide: CGFloat = 44
+		static let defaultQuestionHeigth: CGFloat = 30
+		static let defualtAnswerHeight: CGFloat = 44
+        var leftSide = CompactRow.defaultQuestionHeigth
+        var rightSide = CompactRow.defualtAnswerHeight
     }
     
     class RegularRow: CompactRow {
